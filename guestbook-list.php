@@ -5,7 +5,7 @@
  
 
     //para maprint sa webpage
-    $query = 'SELECT * FROM person';
+    $query = 'SELECT * FROM PERSON';
     $result = mysqli_query($conn,$query);
     $persons = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
@@ -33,11 +33,11 @@
                 <tbody>
                 <?php foreach($persons as $person) : ?>
                     <tr>
-                    <th scope="row"><?php echo $person['id'];?></th>
-                    <td><?php echo $person['lastName'];?></td>
-                    <td><?php echo $person['firstName'];?></td>
+                    <th scope="row"><?php echo $person['pid'];?></th>
+                    <td><?php echo $person['lastname'];?></td>
+                    <td><?php echo $person['firstname'];?></td>
                     <td><?php echo $person['address'];?></td>
-                    <td><?php echo $person['createdAt'];?></td>
+                    <td><?php echo $person['logdt'];?></td>
                     </tr>
                 <?php endforeach; ?>   
                 </tbody>

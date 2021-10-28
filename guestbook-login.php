@@ -6,30 +6,23 @@
   $username = isset($_POST['username'])? $_POST['username']: '';
   $password = isset($_POST['password'])? $_POST['password']: '';
 
-  $query = 'SELECT * FROM accounts';
+  $query = 'SELECT * FROM USERACCOUNT';
   $result = mysqli_query($conn,$query);
   $admins = mysqli_fetch_all($result, MYSQLI_ASSOC);
   mysqli_free_result($result);
   mysqli_close($conn);
-  $error = " ";
 
-
-  if (!empty($_POST['username']) && !empty($_POST['password'])) 
-      {
-        foreach($admins as $admin){
-          if($admin['username'] != ($username) || $admin['password'] != ($password))
-                {$error = "Incorrect Username or Password.";}
-        }
-      }
- foreach($admins as $admin){
-         if($admin['username'] == ($username) && $admin['password'] == ($password))
-            { 
-              header('Location: guestbook-list.php');
-            } 
-      };
-          
+foreach($admins as $admin){
+  if($admin['username'] == $username && $admin['password'] == $password){
+    header('Location: guestbook-list.php');
+  }
+  else if(isset($_POST['submit']) && $admin['username'] != $username || $admin['username'] != $password ){
+   
+      echo '<script> alert("Mali ka") </script>';
+   
+  }
+}
 ?>
-  
 <?php include('inc/header.php'); ?>
   <br/>
   <div style="width:30%; margin: auto; text-align: center;">
@@ -46,8 +39,7 @@
         </label>
       </div>
       <button type="submit" name="submit" value="Submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
-      <?php echo $error; ?>
+
     </form>
   </div>
-
 <?php include('inc/footer.php'); ?>
